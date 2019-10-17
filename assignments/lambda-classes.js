@@ -92,3 +92,35 @@ console.log(student.PRAssignment("JS"));
 console.log(student.sprintChallenge("JS"));
 console.log(pm.standUp("public"));
 console.log(pm.debugsCode(student, "HTML"));
+
+function random(max = 100, min = 1) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+Student.prototype.grade = random();
+console.log(student.grade);
+
+Instructor.prototype.evaluate = function(student) {
+  student.grade -= random(30, 10);
+  return `evaluating ${student.name} complete`;
+};
+
+console.log(instructor.evaluate(student));
+console.log(pm.evaluate(student));
+
+Student.prototype.graduate = function() {
+  if (70 < this.grade) return `${this.name} will graduate`;
+  else {
+    return `${this.name} will not graduate`;
+  }
+};
+
+console.log(student.graduate());
+
+while (true) {
+  console.log(student.graduate());
+  if (70 < student.grade) break;
+  else {
+    student.grade = random();
+    console.log(`boosting ${student.name}'s grade`);
+  }
+}
